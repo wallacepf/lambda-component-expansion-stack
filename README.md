@@ -1,7 +1,12 @@
-# lambda-api-gateway-stack
+# lambda-component-expansion-stack
 
 An example Terraform Stack that provisions an AWS S3 bucket, an AWS Lambda function served from that bucket,
-and an AWS API Gateway to invoke that function at a URL.
+and an AWS API Gateway to invoke that function at a URL, all across multiple AWS accounts with
+varying regions which that account services.
+
+This is the same system as in hashicorp/lambda-multi-account-stack, but additionally demonstrates
+a single deployment using component/provider configuration expansion with `for_each` to provision
+modules in multiple AWS regions for a given environment.
 
 Three components are used:
 

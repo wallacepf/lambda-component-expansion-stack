@@ -1,5 +1,5 @@
-variable "region" {
-  type = string
+variable "regions" {
+  type = list
 }
 
 variable "identity_token_file" {

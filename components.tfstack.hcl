@@ -1,26 +1,30 @@
 component "s3" {
+  for_each = var.regions
+
   source = "./s3"
 
   inputs = {
-    region = var.region
+    region = each.value
   }
 
   providers = {
-    aws    = provider.aws.this
+    aws    = provider.aws.configurations["${each.value}"]
     random = provider.random.this
   }
 }
 
 component "lambda" {
+  for_each = var.regions
+
   source = "./lambda"
 
   inputs = {
     region    = var.region
-    bucket_id = component.s3.bucket_id
+    bucket_id = component.s3["${each.value}"].bucket_id
   }
 
   providers = {
-    aws     = provider.aws.this
+    aws     = provider.aws.configurations["${each.value}"]
     archive = provider.archive.this
     local   = provider.local.this
     random  = provider.random.this
@@ -28,16 +32,18 @@ component "lambda" {
 }
 
 component "api_gateway" {
+  for_each = var.regions
+
   source = "./api-gateway"
 
   inputs = {
     region               = var.region
-    lambda_function_name = component.lambda.function_name
-    lambda_invoke_arn    = component.lambda.invoke_arn
+    lambda_function_name = component.lambda["${each.value}"].function_name
+    lambda_invoke_arn    = component.lambda["${each.value}"].invoke_arn
   }
 
   providers = {
-    aws    = provider.aws.this
+    aws    = provider.aws.configurations["${each.value}"]
     random = provider.random.this
   }
 }
