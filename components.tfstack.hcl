@@ -19,7 +19,7 @@ component "lambda" {
   source = "./lambda"
 
   inputs = {
-    region    = var.region
+    region    = var.regions
     bucket_id = component.s3["${each.value}"].bucket_id
   }
 
