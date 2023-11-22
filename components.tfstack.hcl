@@ -8,7 +8,7 @@ component "s3" {
   }
 
   providers = {
-    aws    = provider.aws.configurations["${each.value}"]
+    aws    = provider.aws.configurations[each.value]
     random = provider.random.this
   }
 }
@@ -20,11 +20,11 @@ component "lambda" {
 
   inputs = {
     region    = var.regions
-    bucket_id = component.s3["${each.value}"].bucket_id
+    bucket_id = component.s3[each.value].bucket_id
   }
 
   providers = {
-    aws     = provider.aws.configurations["${each.value}"]
+    aws     = provider.aws.configurations[each.value]
     archive = provider.archive.this
     local   = provider.local.this
     random  = provider.random.this
@@ -38,12 +38,12 @@ component "api_gateway" {
 
   inputs = {
     region               = var.region
-    lambda_function_name = component.lambda["${each.value}"].function_name
-    lambda_invoke_arn    = component.lambda["${each.value}"].invoke_arn
+    lambda_function_name = component.lambda[each.value].function_name
+    lambda_invoke_arn    = component.lambda[each.value].invoke_arn
   }
 
   providers = {
-    aws    = provider.aws.configurations["${each.value}"]
+    aws    = provider.aws.configurations[each.value]
     random = provider.random.this
   }
 }
