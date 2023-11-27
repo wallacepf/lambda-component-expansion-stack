@@ -37,7 +37,7 @@ component "api_gateway" {
   source = "./api-gateway"
 
   inputs = {
-    region               = var.region
+    region               = each.value
     lambda_function_name = component.lambda[each.value].function_name
     lambda_invoke_arn    = component.lambda[each.value].invoke_arn
   }
