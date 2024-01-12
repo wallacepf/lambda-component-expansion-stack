@@ -30,6 +30,10 @@ provider "aws" "configurations" {
       role_arn                = var.role_arn
       web_identity_token_file = var.identity_token_file
     }
+
+    default_tags {
+      tags = var.default_tags
+    }
   }
 }
 
