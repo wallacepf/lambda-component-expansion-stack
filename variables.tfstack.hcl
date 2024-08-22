@@ -5,8 +5,9 @@ variable "regions" {
   type = set(string)
 }
 
-variable "identity_token_file" {
-  type = string
+variable "identity_token" {
+  type      = string
+  ephemeral = true
 }
 
 variable "role_arn" {
