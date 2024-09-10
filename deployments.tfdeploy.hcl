@@ -23,11 +23,11 @@ deployment "production" {
   }
 }
 
-// deployment "production-br" {
-//   inputs = {
-//     regions        = ["sa-east-1"]
-//     role_arn       = "arn:aws:iam::259193454194:role/wallace-role-stacks-demo"
-//     identity_token = identity_token.aws.jwt
-//     default_tags   = { stacks-preview-example = "lambda-component-expansion-stack" }
-//   }
-// }
+deployment "production-br" {
+  inputs = {
+    regions        = ["sa-east-1"]
+    role_arn       = "arn:aws:iam::259193454194:role/wallace-role-stacks-demo"
+    identity_token = identity_token.aws.jwt
+    default_tags   = { stacks-preview-example = "lambda-component-expansion-stack" }
+  }
+}
